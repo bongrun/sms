@@ -1,15 +1,14 @@
 <?php
 
-namespace jumper423\sms\service;
+namespace bongrun\sms\service;
 
-use jumper423\sms\error\SmsException;
-use yii\helpers\ArrayHelper;
+use bongrun\sms\error\SmsException;
 
 /**
  * http://sms-activate.ru/
  *
  * Class SmsActivateService
- * @package jumper423\sms\service
+ * @package bongrun\sms\service
  */
 class SmsActivateService extends SmsServiceBase
 {
@@ -147,7 +146,7 @@ class SmsActivateService extends SmsServiceBase
     public function getNumbersStatus($site = null)
     {
         $result = parent::getNumbersStatus($site);
-        return ArrayHelper::getValue($result, "{$this->site['name']}_0", 0);
+        return $result["{$this->site['name']}_0"] ?? 0;
     }
 
     /** @inheritdoc */

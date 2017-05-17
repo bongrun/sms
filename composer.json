@@ -1,24 +1,22 @@
 {
-  "name": "jumper423/yii2-sms",
+  "name": "bongrun/yii2-sms",
   "description": "Приём смс сообщений",
-  "keywords": ["yii2", "sms", "api"],
-  "homepage": "https://github.com/jumper423/yii2-sms",
+  "keywords": ["bongrun", "sms", "api"],
+  "homepage": "https://github.com/bongrun/sms",
   "type": "project",
   "license": "Apache License 2.0",
   "support": {
-    "issues": "https://github.com/jumper423/yii2-sms/issues?state=open",
-    "source": "https://github.com/jumper423/yii2-sms"
+    "issues": "https://github.com/bongrun/sms/issues?state=open",
+    "source": "https://github.com/bongrun/sms"
   },
   "minimum-stability": "stable",
   "require": {
-    "php": ">=5.4.0",
-    "yiisoft/yii2": "*",
-    "jumper423/yii2-behaviors": "*"
+    "php": ">=7.0"
   },
   "config": {
     "process-timeout": 1800
   },
   "autoload": {
-    "psr-4": {"jumper423\\sms\\": ""}
+    "psr-4": {"bongrun\\sms\\": ""}
   }
 }

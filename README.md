@@ -1,6 +1,6 @@
-yii2-sms
+sms
 ========
-[![PHP version](https://badge.fury.io/ph/jumper423%2Fyii2-sms.svg)](https://badge.fury.io/ph/jumper423%2Fyii2-sms)
+[![PHP version](https://badge.fury.io/ph/bongrun%2Fsms.svg)](https://badge.fury.io/ph/bongrun%2Fsms)
 
 Приём смс сообщений
 
@@ -28,14 +28,13 @@ yii2-sms
 Либо запустить
 
 ```
-composer global require "fxp/composer-asset-plugin:^1.2.0"
-composer require --prefer-dist jumper423/yii2-sms "*"
+composer require --prefer-dist bongrun/sms "*"
 ```
 
 или добавить
 
 ```
-"jumper423/yii2-sms": "*"
+"bongrun/sms": "*"
 ```
 
 в файл `composer.json`.
@@ -47,23 +46,23 @@ composer require --prefer-dist jumper423/yii2-sms "*"
 ```php
 'components' => [
     'sms' => [
-        'class' => \jumper423\sms\Sms::className(),
-        'site' => \jumper423\sms\service\SmsSites::OTHER,
+        'class' => \bongrun\sms\Sms::className(),
+        'site' => \bongrun\sms\service\SmsSites::OTHER,
         'services' => [
             [
-                'class' => \jumper423\sms\service\SmsActivateService::className(),
+                'class' => \bongrun\sms\service\SmsActivateService::className(),
                 'apiKey' => 'apiKey1234567890',
             ],
             [
-                'class' => \jumper423\sms\service\SmsAreaService::className(),
+                'class' => \bongrun\sms\service\SmsAreaService::className(),
                 'apiKey' => 'apiKey1234567890',
             ],
             [
-                'class' => \jumper423\sms\service\SmsSimService::className(),
+                'class' => \bongrun\sms\service\SmsSimService::className(),
                 'apiKey' => 'apiKey1234567890',
             ],
             [
-                'class' => \jumper423\sms\service\SmsRegService::className(),
+                'class' => \bongrun\sms\service\SmsRegService::className(),
                 'apiKey' => 'apiKey1234567890',
             ],
         ],
@@ -88,7 +87,7 @@ if (!$balance) {
 
 #### Изменяем сайт с которого необходимо получить смс
 ```php
-$sms->site = \jumper423\sms\service\SmsSites::VKONTAKTE;
+$sms->site = \bongrun\sms\service\SmsSites::VKONTAKTE;
 ```
 
 #### Количество доступных номеров

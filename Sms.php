@@ -1,18 +1,16 @@
 <?php
 
-namespace jumper423\sms;
+namespace bongrun\sms;
 
-use jumper423\sms\error\SmsException;
-use jumper423\sms\service\SmsServiceBase;
-use jumper423\sms\service\SmsSites;
-use yii\base\Component;
-use yii\base\Exception;
+use bongrun\sms\error\SmsException;
+use bongrun\sms\service\SmsServiceBase;
+use bongrun\sms\service\SmsSites;
 
 /**
  * Class Sms
- * @package jumper423\sms
+ * @package bongrun\sms
  */
-class Sms extends Component
+class Sms
 {
     /** @var SmsServiceBase */
     private $service;
@@ -60,12 +58,12 @@ class Sms extends Component
 
     public function init()
     {
-        parent::init();
         $services = [];
         foreach ($this->services as $key => $service) {
             try {
                 if (!is_object($service)) {
-                    $service = \Yii::createObject($service);
+                    /** @var SmsServiceBase $service */
+                    $service = new $service['class']($service['apiKey']);
                     $balance = $service->getBalance();
                     if (is_null($balance) || $balance > 0) {
                         $services[$key] = $service;
@@ -104,7 +102,7 @@ class Sms extends Component
      * Доступное количество номеров
      * @param null|array $site
      * @return integer
-     * @throws Exception
+     * @throws \Exception
      */
     public function getNumbersStatus($site = null)
     {
@@ -123,7 +121,7 @@ class Sms extends Component
     /**
      * Баланс
      * @return integer
-     * @throws Exception
+     * @throws \Exception
      */
     public function getBalance()
     {
@@ -145,13 +143,11 @@ class Sms extends Component
      */
     public function getNumber($site = null)
     {
-        $this->trigger(self::EVENT_BEFORE_NUMBER);
         $this->setSite($site);
         foreach ($this->services as $service) {
             try {
                 $number = $service->getNumber();
                 $this->service = $service;
-                $this->trigger(self::EVENT_AFTER_NUMBER);
                 return $number;
             } catch (SmsException $e) {
             }

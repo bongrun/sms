@@ -1,12 +1,12 @@
 <?php
 
-namespace jumper423\sms\service;
+namespace bongrun\sms\service;
 
 /**
  * Сайты
  *
  * Class SmsSites
- * @package jumper423\sms\service
+ * @package bongrun\sms\service
  */
 class SmsSites
 {

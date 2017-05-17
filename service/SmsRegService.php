@@ -1,15 +1,15 @@
 <?php
 
-namespace jumper423\sms\service;
+namespace bongrun\sms\service;
 
-use jumper423\sms\error\SmsException;
+use bongrun\sms\error\SmsException;
 use yii\helpers\Json;
 
 /**
  * http://sms-reg.com/
  *
  * Class SmsRegService
- * @package jumper423\sms\service
+ * @package bongrun\sms\service
  */
 class SmsRegService extends SmsServiceBase
 {
@@ -159,14 +159,14 @@ class SmsRegService extends SmsServiceBase
     {
         $result = parent::getNumber($site);
         if (self::isJson($result)) {
-            $result = Json::decode($result);
+            $result = json_decode($result, true);
             if (isset($result['response']) && $result['response'] == 1) {
                 $this->sessionId = $result['tzid'];
                 $inpoll = 0;
                 while (true) {
                     $result = $this->curl('getState', ['tzid' => $this->sessionId]);
                     if (self::isJson($result)) {
-                        $result = Json::decode($result);
+                        $result = json_decode($result, true);
                         switch ($result['response']) {
                             case 'TZ_INPOOL':
                                 if ($inpoll > 5) {
@@ -179,13 +179,13 @@ class SmsRegService extends SmsServiceBase
                                 $this->number = str_pad($result['number'], 12, "+7", STR_PAD_LEFT);
                                 return $this->number;
                             default:
-                                throw new SmsException(Json::encode($result));
+                                throw new SmsException(json_encode($result));
                         }
                     }
                 }
             }
         }
-        throw new SmsException(Json::encode($result));
+        throw new SmsException(json_encode($result));
     }
 
     /** @inheritdoc */
@@ -194,12 +194,12 @@ class SmsRegService extends SmsServiceBase
         $result = parent::setStatus($status);
         if (!is_null($result)) {
             if (self::isJson($result)) {
-                $result = Json::decode($result);
+                $result = json_decode($result, true);
                 if (isset($result['response']) && $result['response'] == 1) {
                     return;
                 }
             }
-            throw new SmsException(Json::encode($result));
+            throw new SmsException(json_encode($result));
         }
     }
 
@@ -214,7 +214,7 @@ class SmsRegService extends SmsServiceBase
             }
             $result = parent::getCode();
             if (self::isJson($result)) {
-                $result = Json::decode($result);
+                $result = json_decode($result, true);
                 if (isset($result['response'])) {
                     switch ($result['response']) {
                         case 'TZ_NUM_ANSWER' :

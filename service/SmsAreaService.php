@@ -1,14 +1,14 @@
 <?php
 
-namespace jumper423\sms\service;
+namespace bongrun\sms\service;
 
-use jumper423\sms\error\SmsException;
+use bongrun\sms\error\SmsException;
 
 /**
  * http://sms-area.org/
  *
  * Class SmsAreaService
- * @package jumper423\sms\service
+ * @package bongrun\sms\service
  */
 class SmsAreaService extends SmsServiceBase
 {

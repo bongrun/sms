@@ -1,15 +1,14 @@
 <?php
 
-namespace jumper423\sms\service;
+namespace bongrun\sms\service;
 
-use jumper423\sms\error\SmsException;
-use yii\helpers\Json;
+use bongrun\sms\error\SmsException;
 
 /**
  * http://simsms.org/
  *
  * Class SmsSimService
- * @package jumper423\sms\service
+ * @package bongrun\sms\service
  */
 class SmsSimService extends SmsServiceBase
 {
@@ -235,14 +234,14 @@ class SmsSimService extends SmsServiceBase
     {
         $result = parent::getNumbersStatus($site);
         if (self::isJson($result)) {
-            $result = Json::decode($result);
+            $result = json_decode($result, true);
             foreach ($result as $key => $value) {
                 if (strpos($key, 'counts') !== false) {
                     return $value;
                 }
             }
         }
-        throw new SmsException(Json::encode($result));
+        throw new SmsException(json_encode($result));
     }
 
     /** @inheritdoc */
@@ -251,13 +250,13 @@ class SmsSimService extends SmsServiceBase
         if (is_null($this->balance)) {
             $result = parent::getBalance();
             if (self::isJson($result)) {
-                $result = Json::decode($result);
+                $result = json_decode($result, true);
                 if (isset($result['balance'])) {
                     $this->balance = $result['balance'];
                     return $this->balance;
                 }
             }
-            throw new SmsException(Json::encode($result));
+            throw new SmsException(json_encode($result));
         }
         return $this->balance;
     }
@@ -271,7 +270,7 @@ class SmsSimService extends SmsServiceBase
                 sleep(10);
                 $result = parent::getNumber($site);
                 if (self::isJson($result)) {
-                    $result = Json::decode($result);
+                    $result = json_decode($result, true);
                     if (isset($result['response']) && $result['response'] == 1 && isset($result['number']) && $result['number'] && isset($result['id']) && $result['id'] > 0) {
                         $this->sessionId = $result['id'];
                         $this->number = str_pad($result['number'], 12, "+7", STR_PAD_LEFT);
@@ -281,7 +280,7 @@ class SmsSimService extends SmsServiceBase
                         continue;
                     }
                 }
-                throw new SmsException(Json::encode($result));
+                throw new SmsException(json_encode($result));
             }
             throw new SmsException('Время поиска номеров истекло');
         }
@@ -294,7 +293,7 @@ class SmsSimService extends SmsServiceBase
         $result = parent::setStatus($status);
         if (!is_null($result)) {
             if (self::isJson($result)) {
-                $result = Json::decode($result);
+                $result = json_decode($result, true);
                 if (isset($result['response']) && $result['response'] == 1) {
                     return;
                 }
@@ -315,7 +314,7 @@ class SmsSimService extends SmsServiceBase
             }
             $result = parent::getCode();
             if (self::isJson($result)) {
-                $result = Json::decode($result);
+                $result = json_decode($result, true);
                 if (isset($result['response'])) {
                     switch ($result['response']) {
                         case 1 :
@@ -324,12 +323,12 @@ class SmsSimService extends SmsServiceBase
                             sleep(10);
                             break;
                         default:
-                            throw new SmsException(Json::encode($result));
+                            throw new SmsException(json_encode($result));
                     }
                     continue;
                 }
             }
-            throw new SmsException(Json::encode($result));
+            throw new SmsException(json_encode($result));
         }
     }
 }

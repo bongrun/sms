@@ -1,13 +1,10 @@
 <?php
 
-namespace jumper423\sms\service;
+namespace bongrun\sms\service;
 
-use jumper423\sms\error\SmsException;
-use yii\helpers\ArrayHelper;
-use yii\base\Component;
-use jumper423\behaviors\СallableBehavior;
+use bongrun\sms\error\SmsException;
 
-class SmsServiceBase extends Component
+class SmsServiceBase
 {
     /** @var string Ключ API */
     public $apiKey = null;
@@ -47,24 +44,9 @@ class SmsServiceBase extends Component
     /** получает статус */
     public static $METHOD_GET_STATUS = null;
 
-    const EVENT_INIT = 'init';
-
-    public function init()
+    public function __construct($apiKey)
     {
-        parent::init();
-        $this->trigger(self::EVENT_INIT);
-    }
-
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => СallableBehavior::className(),
-                'attributes' => [
-                    self::EVENT_INIT => ['apiKey',],
-                ],
-            ],
-        ];
+        $this->apiKey = $apiKey;
     }
 
     public function setSite($site = null)
@@ -187,7 +169,7 @@ class SmsServiceBase extends Component
             }
             $method = $method['method'];
         }
-        $params = ArrayHelper::merge([
+        $params = array_merge([
             $this::API_KEY => $this->apiKey,
         ], $params);
 
@@ -197,7 +179,6 @@ class SmsServiceBase extends Component
         } else {
             $url = str_replace("{method}", $method, $this->href) . '?' . http_build_query($params);
         }
-        \Yii::info($url, 'curl');
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 60);

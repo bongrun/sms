@@ -1,16 +1,14 @@
 <?php
 
-namespace jumper423\sms\error;
-
-use yii\base\Exception;
+namespace bongrun\sms\error;
 
 /**
  * Ошибка
  *
  * Class SmsException
- * @package jumper423\sms\error
+ * @package bongrun\sms\error
  */
-class SmsException extends Exception
+class SmsException extends \Exception
 {
 
 }
