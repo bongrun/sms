@@ -1,5 +1,5 @@
 {
-  "name": "bongrun/yii2-sms",
+  "name": "bongrun/sms",
   "description": "Приём смс сообщений",
   "keywords": ["bongrun", "sms", "api"],
   "homepage": "https://github.com/bongrun/sms",
