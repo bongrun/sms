@@ -42,22 +42,14 @@ class Sms
     const STATUS_USED = 'used';
 
     /**
-     * @event Событие перед получением номера
-     */
-    const EVENT_BEFORE_NUMBER = 'beforeNumber';
-    /**
-     * @event Событие после получением номера
-     */
-    const EVENT_AFTER_NUMBER = 'afterNumber';
-
-    /**
      * Сервисы по приёму смс
      * @var SmsServiceBase[]
      */
     public $services = [];
 
-    public function init()
+    public function __construct($services)
     {
+        $this->services = $services;
         $services = [];
         foreach ($this->services as $key => $service) {
             try {
