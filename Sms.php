@@ -47,7 +47,12 @@ class Sms
      */
     public $services = [];
 
-    public function __construct($services)
+    /**
+     * Sms constructor.
+     * @param $services
+     * @param null $site
+     */
+    public function __construct($services, $site = null)
     {
         $this->services = $services;
         $services = [];
@@ -65,7 +70,7 @@ class Sms
             }
         }
         $this->services = $services;
-        $this->setSite($this->site);
+        $this->setSite($site);
     }
 
     /**
