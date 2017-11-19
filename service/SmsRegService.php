@@ -143,13 +143,13 @@ class SmsRegService extends SmsServiceBase
         if (is_null($this->balance)) {
             $result = parent::getBalance();
             if (self::isJson($result)) {
-                $result = Json::decode($result);
+                $result = json_decode($result, true);
                 if (isset($result['response']) && $result['response'] == 1) {
                     $this->balance = $result['balance'];
                     return $this->balance;
                 }
             }
-            throw new SmsException(Json::encode($result));
+            throw new SmsException(json_encode($result));
         }
         return $this->balance;
     }

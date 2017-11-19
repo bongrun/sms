@@ -99,7 +99,7 @@ class Sms
      * Доступное количество номеров
      * @param null|array $site
      * @return integer
-     * @throws \Exception
+     * @throws SmsException
      */
     public function getNumbersStatus($site = null)
     {
@@ -118,7 +118,7 @@ class Sms
     /**
      * Баланс
      * @return integer
-     * @throws \Exception
+     * @throws SmsException
      */
     public function getBalance()
     {
@@ -154,7 +154,8 @@ class Sms
 
     /**
      * Задаём статус
-     * @param int $status
+     *
+     * @param string $status
      * @throws SmsException
      */
     public function setStatus($status = self::STATUS_READY)
