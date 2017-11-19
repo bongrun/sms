@@ -1,6 +1,6 @@
 <?php
 
-namespace instances;
+namespace bongrun\sms\instances;
 
 interface SmsAccessInstance
 {

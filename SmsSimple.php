@@ -2,7 +2,7 @@
 
 namespace bongrun\sms;
 
-use instances\SmsAccessInstance;
+use bongrun\sms\instances\SmsAccessInstance;
 
 class SmsSimple
 {
